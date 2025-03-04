@@ -1,0 +1,64 @@
+body {
+    width: 99vw;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app {
+    margin: 0;
+    padding: 0;
+    width: 60vw;
+    height: 60vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.prev {
+    position: relative;
+    padding: 10%;
+    border: 2px solid rgb(14, 16, 16);
+    border-radius: 10px;
+}
+
+#dynamicButton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: blue;
+    color: #F5F5F5;
+}
+
+#dynamicButton:hover{
+    background-color: #0404d7;
+    color: #ffffff;
+}
+
+#copyCSS {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    right: 5px;
+    top: 5px;
+    background-color: white;
+    border: none;
+    border: 2px solid blue;
+    border-radius: 10px;
+    padding: 3px;
+}
+
+.watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    opacity: 0.2;
+    font-size: 150px;
+    color: #000000;
+    z-index: 9999;
+    pointer-events: none;
+    /* white-space: nowrap; */
+}
