@@ -16,7 +16,7 @@ textColor.addEventListener('input', updateButtonStyle);
 buttonColor.addEventListener('input', updateButtonStyle);
 
 function showHoverInputs() {
-    var styleType = document.getElementById('styleType').value;
+    const styleType = document.getElementById('styleType').value;
 
     if (styleType === 'hover') {
         hoverStyleInputs.style.display = 'block';
@@ -50,8 +50,8 @@ function updateButtonStyle() {
             button.style.color = hoverTextColor.value;
         };
         button.onmouseout = () => {
-            button.style.backgroundColor = '';
-            button.style.color = '';
+            button.style.backgroundColor = backgroundColor;
+            button.style.color = color;
         };
     }
 
@@ -64,14 +64,10 @@ copyCSS.addEventListener('click', () => {
             border-radius: ${borderRadius.value}%;
             color: ${textColor.value};
             background-color: ${buttonColor.value};
-            ${styleType.value === 'background' ? `
-            '';
-            ` : `
         }
         #dynamicButton:hover {
             background-color: ${hoverBgColor.value};
             color: ${hoverTextColor.value};
-            `}
         }
     `;
     navigator.clipboard.writeText(css).then(() => {
