@@ -1,110 +1,94 @@
 const button = document.getElementById('dynamicButton');
 const buttonText = document.getElementById('buttonText');
+const borderRadius = document.getElementById('borderRadius');
 const styleType = document.getElementById('styleType');
 const textColor = document.getElementById('textColor');
 const buttonColor = document.getElementById('buttonColor');
-const borderRadius = document.getElementById('borderRadius');
 const copyCSS = document.getElementById('copyCSS');
 
-// const hoverTextColor = document.getElementById('hoverTextColor');
-// const hoverBgColor = document.getElementById('hoverBgColor');
-
-// let hoverStyleInputs = document.getElementById('hoverStyleInputs');
-// let normalStyleInputs = document.getElementById('normalStyleInputs');
-
-styleType.addEventListener('change', switchStyles);
-// textColor.addEventListener('input', switchStyles);
-// buttonColor.addEventListener('input', switchStyles);
-
-// styleType.addEventListener('change', updateButtonStyle);
-textColor.addEventListener('input', updateButtonStyle);
-buttonColor.addEventListener('input', updateButtonStyle);
-
-// function showHoverInputs() {
-//     const styleType = document.getElementById('styleType').value;
-
-//     if (styleType === 'hover') {
-//         hoverStyleInputs.style.display = 'block';
-//         normalStyleInputs.style.display = 'none';
-
-//     } else {
-//         hoverStyleInputs.style.display = 'none';
-//         normalStyleInputs.style.display = 'block';
-//     }
-
-// }
+const styles = {
+    background: "",
+    color: "",
+    hoverBackground: "",
+    hoverColor: "",
+    focusBg:"",
+    focusColor: ""
+}
 
 buttonText.addEventListener('input', () => {
-    button.innerText = buttonText.value===""? "Click Me": buttonText.value;
+    button.innerText = buttonText.value === "" ? "Click Me" : buttonText.value;
 });
 
 borderRadius.addEventListener('input', () => {
     button.style.borderRadius = `${borderRadius.value}%`;
 });
 
- 
-const styles = {
-    background: "",
-    color: "",
-    hoverBackground: "",
-    hoverColor: ""
- }
-  
 
- function updateButtonStyle() {
-    if(styleType.value === 'hover'){
-        styles.hoverBackground = buttonColor.value;
+styleType.addEventListener('change', switchStyles);
+textColor.addEventListener('input', updateButtonStyle);
+buttonColor.addEventListener('input', updateButtonStyle);
+
+function updateButtonStyle() {
+    if (styleType.value === 'hover') {
         styles.hoverColor = textColor.value;
-    }else{
-        styles.background = buttonColor.value;
+        styles.hoverBackground = buttonColor.value;
+    }else if(styleType.value === 'focus'){
+        styles.focusColor = textColor.value;
+        styles.focusBg = buttonColor.value;
+    }else {
         styles.color = textColor.value;
+        styles.background = buttonColor.value;
     }
 
     button.style.backgroundColor = styles.background;
     button.style.color = styles.color;
 
-    button.onmouseover = function() {
+    button.onmouseover = function () {
         button.style.backgroundColor = styles.hoverBackground;
         button.style.color = styles.hoverColor;
     };
 
-    button.onmouseout = function() {
+    // button.onmouseout = function () {
+    //     button.style.backgroundColor = styles.background;
+    //     button.style.color = styles.color;
+    // };
+
+
+    button.onfocus = function () {
+        button.style.backgroundColor = styles.focusBg;
+        button.style.color = styles.focusColor;
+    };
+
+    // button.onblur = function () {
+    //     button.style.backgroundColor = styles.background;
+    //     button.style.color = styles.color;
+    // };
+
+
+    const resetStyles = function () {
         button.style.backgroundColor = styles.background;
         button.style.color = styles.color;
     };
 
+    button.onmouseout = resetStyles;
+    button.onblur = resetStyles;
+
 }
 
-
-function switchStyles(){
-    if(styleType.value === 'hover'){
-
-        buttonColor.value = styles.hoverBackground;
+function switchStyles() {
+    if (styleType.value === 'hover') {
         textColor.value = styles.hoverColor;
-    }else{
-        buttonColor.value = styles.background;
+        buttonColor.value = styles.hoverBackground;
+    } else if(styleType.value === 'focus'){
+        textColor.value = styles.focusColor;
+        buttonColor.value = styles.focusBg;
+    }else {
         textColor.value = styles.color;
+        buttonColor.value = styles.background;
     }
 }
 
-// function updateButtonStyle() {
-//     const color = textColor.value;
-//     const backgroundColor = buttonColor.value;
-//     if (styleType.value === 'background') {
-//         button.style.backgroundColor = backgroundColor;
-//         button.style.color = color;
-//     } else if (styleType.value === 'hover') {
-//         button.onmouseover = () => {
-//             button.style.backgroundColor = hoverBgColor.value;
-//             button.style.color = hoverTextColor.value;
-//         };
-//         button.onmouseout = () => {
-//             button.style.backgroundColor = backgroundColor;
-//             button.style.color = color;
-//         };
-//     }
 
-// }
 
 copyCSS.addEventListener('click', () => {
     const css = `
@@ -115,8 +99,13 @@ copyCSS.addEventListener('click', () => {
             background-color: ${styles.background};
         }
         #dynamicButton:hover {
-            background-color: ${styles.hoverBackground};
             color: ${styles.hoverColor};
+            background-color: ${styles.hoverBackground};
+        }
+
+        #dynamicButton:focus {
+            color: ${styles.focusColor};
+            background-color: ${styles.focusBg};
         }
     `;
     navigator.clipboard.writeText(css).then(() => {

@@ -12,13 +12,19 @@
             <h2><u>Set Styling</u></h2>
             <label for="buttonText">Button Text:</label>
             <input type="text" id="buttonText" placeholder="Enter button text">
+              
+            <br><br>
         
+            <label for="borderRadius">Border Radius:</label>
+            <input type="range" id="borderRadius" min="0" max="50">
+
             <br><br>
 
             <label for="styleType">Style Type:</label>
             <select id="styleType" onchange="showHoverInputs()">
                 <option value="background">Background</option>
                 <option value="hover">Hover</option>
+                <option value="focus">Focus</option>
             </select>
         
             <br><br>
@@ -30,27 +36,11 @@
                 <label for="buttonColor">Button Color:</label>
                 <input type="color" id="buttonColor" value="#0000ff">
             </div>
-        
-            <!-- <div id="hoverStyleInputs" style="display: none;"> 
-                <label for="hoverTextColor">Hover Text Color:</label>
-                <input type="color" id="hoverTextColor" value="#ffffff">
-                <br><br>
-                <label for="hoverBgColor">Hover Background Color:</label>
-                <input type="color" id="hoverBgColor" value="#0404d7">
-            </div> -->
-        
-            <br><br>
-        
-            <label for="borderRadius">Border Radius:</label>
-            <input type="range" id="borderRadius" min="0" max="50">
-            
-            <br><br>
+
         </div>
     
         <div class="prev">
             <button id="dynamicButton">Click me</button>
-        
-            <br><br>
             
             <button id="copyCSS">Copy CSS</button>
         </div>

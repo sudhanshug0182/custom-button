@@ -37,6 +37,10 @@ body {
     color: #ffffff;
 }
 
+#dynamicButton:focus{
+    background-color: aqua;
+}
+
 #copyCSS {
     position: absolute;
     margin: 0;
@@ -50,6 +54,11 @@ body {
     padding: 3px;
     cursor: pointer;
 }
+
+#copyCSS:hover {
+    transform: scale(1.1);     
+}
+
 
 .watermark {
     position: fixed;
